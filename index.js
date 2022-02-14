@@ -55,7 +55,9 @@ function createLoader(successMessage, failedMessage, animFrames = defaultFrames)
 
     const markAsFailed = () => write(failedMessage, true, animLoop);
     const markAsSuccess = () => write(successMessage, true, animLoop);
-    const attach = (prom) => prom.then(markAsSuccess).catch(markAsFailed);
+    const attach = (prom) => {
+        prom.then(markAsSuccess).catch(markAsFailed);
+    }
 
     return {
         markAsSuccess, markAsFailed, attach
