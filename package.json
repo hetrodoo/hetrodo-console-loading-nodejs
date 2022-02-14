@@ -1,0 +1,9 @@
+{
+  "name": "hetrodo-loading-nodejs",
+  "version": "1.0.0",
+  "description": "A util function to show a simple loading animation on console.",
+  "main": "index.js",
+  "repository": "https://github.com/hetrodoo/hetrodo-loading-nodejs",
+  "author": "hetrodo",
+  "license": "MIT"
+}
