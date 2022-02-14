@@ -4,13 +4,7 @@ declare interface loader<T> {
     attach: (prom: Promise<T>) => void
 }
 
-declare function createLoader<T>(successMessage: string, failedMessage: string, animFrames?: string[]): loader<T>;
+export declare function createLoader<T>(successMessage: string, failedMessage: string, animFrames?: string[]): loader<T>;
 
-declare const defaultFramesNoText: string[]
-declare const defaultFrames: string[]
-
-export default {
-    createLoader,
-    defaultFrames,
-    defaultFramesNoText
-}
+export declare const defaultFramesNoText: string[]
+export declare const defaultFrames: string[]
