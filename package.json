@@ -1,9 +1,10 @@
 {
   "name": "node-console-loading",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A util function to show a simple loading animation on console.",
   "main": "index.js",
-  "repository": "https://github.com/hetrodoo/hetrodo-loading-nodejs",
+  "repository": "https://github.com/hetrodoo/hetrodo-console-loading-nodejs",
   "author": "hetrodo",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["console", "animation", "loading"]
 }
