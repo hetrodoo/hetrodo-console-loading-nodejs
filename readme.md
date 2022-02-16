@@ -1,7 +1,6 @@
-
 # [node-console-loading](https://www.npmjs.com/package/node-console-loading)
 
-A util function to show a simple loading animation on console.
+An util function to show a simple loading animation on a terminal.
 
 ### Tested Platforms
 
@@ -22,21 +21,16 @@ npm install node-console-loading
 ## Usage
 
 ```typescript
-import {createLoader} from "node-console-loading";
+import createLoader from "node-console-loading";
 
 //Creating a loading animation
-const loader = createLoader("Success!", "Failed!");
+createLoader(yourPromise, "Resolved! :)", "Rejected! :(");
 
-//To stop use:
-loader.markAsSuccess();
-loader.markAsFailed();
+//Use case using axios
+import axios from "axios";
 
-//You can attach to a promise using the attach method
-const promise = new Promise(resolve => {
-    setTimeout(resolve, 2000); //A promise that resolves itself in 2 seconds
-});
-
-loader.attach(promise);
+const requestPromise = axios.get("https://example.com/");
+createLoader(requestPromise, "Resolved! :)", "Rejected! :(");
 
 //Using your own custom animation
 const frames = [
@@ -48,7 +42,7 @@ const frames = [
     " .  ",
 ]
 
-createLoader("Success!", "Failed!", frames);
+createLoader(yourPromise, "Resolved! :)", "Rejected! :(", frames);
 ```
 
 ## Contributing

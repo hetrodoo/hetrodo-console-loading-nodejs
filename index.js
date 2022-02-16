@@ -1,24 +1,6 @@
+const process = require("process");
+
 const defaultFrames = [
-    "[<->---------] Loading...",
-    "[-<->--------] Loading...",
-    "[--<->-------] Loading...",
-    "[---<->------] Loading...",
-    "[----<->-----] Loading...",
-    "[-----<->----] Loading...",
-    "[------<->---] Loading...",
-    "[-------<->--] Loading...",
-    "[--------<->-] Loading...",
-    "[---------<->] Loading...",
-    "[--------<->-] Loading...",
-    "[-------<->--] Loading...",
-    "[------<->---] Loading...",
-    "[-----<->----] Loading...",
-    "[----<->-----] Loading...",
-    "[---<->------] Loading...",
-    "[--<->-------] Loading...",
-    "[-<->--------] Loading..."
-];
-const defaultFramesNoText = [
     "[<->---------]",
     "[-<->--------]",
     "[--<->-------]",
@@ -39,7 +21,22 @@ const defaultFramesNoText = [
     "[-<->--------]"
 ];
 
-function createLoader(successMessage, failedMessage, animFrames = defaultFrames) {
+/**
+ * Creates a loading animation
+ * @example
+ * createLoader(yourPromise, "Success!", "Failed!");
+ * @example
+ * // Using your own keyframes (This should show a dot going left -> right -> left)
+ * const frames = [".   ", " .  ", "  . ", "   .", "  . ", " .  "];
+ * createLoader(yourPromise, "Success!", "Failed!", frames);
+ * @param {Promise} promise
+ * @param {string} resolve
+ * @param {string} reject
+ * @param {string[]} [animFrames = defaultFrames]
+ * @returns {void}
+ */
+function createLoader(promise, resolve, reject, animFrames) {
+    if (!animFrames) animFrames = defaultFrames;
     let index = 0;
 
     const write = (value, clear = false, interval = null) => {
@@ -53,17 +50,11 @@ function createLoader(successMessage, failedMessage, animFrames = defaultFrames)
         index = ((index + 1) % animFrames.length);
     }, 64);
 
-    const markAsFailed = () => write(failedMessage, true, animLoop);
-    const markAsSuccess = () => write(successMessage, true, animLoop);
-    const attach = (prom) => {
-        prom.then(markAsSuccess).catch(markAsFailed);
-    }
-
-    return {
-        markAsSuccess, markAsFailed, attach
-    }
+    promise.then(() => {
+        write(resolve, true, animLoop);
+    }).catch(() => {
+        write(reject, true, animLoop);
+    });
 }
 
-module.exports = {
-    createLoader, defaultFrames, defaultFramesNoText
-}
+module.exports = createLoader;

@@ -1,10 +1,12 @@
-declare interface loader<T> {
-    markAsSuccess: () => void,
-    markAsFailed: () => void,
-    attach: (prom: Promise<T>) => void
-}
+/**
+ * Creates a loading animation
+ * @example
+ * createLoader(yourPromise, "Success!", "Failed!");
+ * @example
+ * // Using your own keyframes (This should show a dot going left -> right -> left)
+ * const frames = [".   ", " .  ", "  . ", "   .", "  . ", " .  "];
+ * createLoader(yourPromise, "Success!", "Failed!", frames);
+ */
+declare function createLoader<T>(promise: Promise<T>, resolve: string, reject: string, animFrames?: string[]): void;
 
-export declare function createLoader<T>(successMessage: string, failedMessage: string, animFrames?: string[]): loader<T>;
-
-export declare const defaultFramesNoText: string[]
-export declare const defaultFrames: string[]
+export default createLoader;
