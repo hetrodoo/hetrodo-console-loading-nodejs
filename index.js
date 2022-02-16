@@ -51,9 +51,9 @@ function createLoader(promise, resolve, reject, animFrames) {
     }, 64);
 
     promise.then(() => {
-        write(resolve, true, animLoop);
+        write(`${resolve}\r\n`, true, animLoop);
     }).catch(() => {
-        write(reject, true, animLoop);
+        write(`${reject}\r\n`, true, animLoop);
     });
 }
 
